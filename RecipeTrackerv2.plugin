@@ -1,0 +1,12 @@
+﻿<?xml version="1.0"?>
+<Plugin>
+  <Information>
+    <Name>RecipeTracker v2</Name>
+    <Author>Bowcosid</Author>
+    <Version>2.0.4</Version>
+    <Description>Tracks known and unknown recipes for all your alts, allowing them to be checked without logging out.</Description>
+    <Image>Bowcosid/RecipeTracker/Resources/RecipeTrackerIcon.tga</Image>
+  </Information>
+  <Package>Bowcosid.RecipeTracker.Main</Package>
+  <Configuration Apartment="RecipeTracker" />
+</Plugin>

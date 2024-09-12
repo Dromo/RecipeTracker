@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PluginConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Id>1107</Id>
+  <Name>Recipe Tracker v2</Name>
+  <Version>2.0.4</Version>
+  <Author>Bowcosid</Author>
+  <InfoUrl>http://www.lotrointerface.com/downloads/info1107</InfoUrl>
+  <DownloadUrl>http://www.lotrointerface.com/downloads/download1107</DownloadUrl>
+  <Descriptors>
+    <descriptor>Bowcosid\RecipeTrackerv2.plugin</descriptor>
+  </Descriptors>
+  <Dependencies />
+</PluginConfig>
