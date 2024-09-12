@@ -2,7 +2,7 @@
 function CreateOptionsPanel()
 	OptionsPanel = Turbine.UI.Control();
 
-	OptionsPanel:SetHeight(500);
+	OptionsPanel:SetHeight(200);
 
 	local minimizeCheckBox = Turbine.UI.Lotro.CheckBox();
 	minimizeCheckBox:SetParent(OptionsPanel);

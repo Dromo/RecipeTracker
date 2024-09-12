@@ -14,7 +14,7 @@ function RegisterCommands()
 				ShowMainWindow();
 			end
 		elseif arguments == "options" then
-			Turbine.PluginManager.ShowOptions(Plugins.RecipeTracker);
+			Turbine.PluginManager.ShowOptions(Plugins["RecipeTracker v2"]);
 		else
 			Turbine.Shell.WriteLine(Strings.Usage);
 		end
