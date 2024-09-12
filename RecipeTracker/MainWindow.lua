@@ -4,27 +4,27 @@ function CreateMainWindow()
 	local windowHeight = 500;
 
 	local characterDropDownTop = 40;
-	local characterDropDownLeft = windowWidth * 0.13;
+	local characterDropDownLeft = 20;
 
-	local professionButtonTop = 70;
+	local professionButtonTop = 40;
 	local professionButtonWidth = 100;
 
-	local searchTop = 100;
+	local searchTop = 70;
 
 	local treeLeft = 10;
 	local treeTop = searchTop + 20;
 	local treeWidth = windowWidth * 0.45;
-	local treeHeight = windowHeight - 140;
+	local treeHeight = windowHeight - 115;
 
 	local tabLeft = treeWidth + 25;
-	local tabTop = 40;
+	local tabTop = 70;
 	local tabWidth = 100;
 	local tabHeight = 20;
 
 	local selectedRecipeLeft = tabLeft;
-	local selectedRecipeTop = 60;
+	local selectedRecipeTop = tabTop + tabHeight;
 	local selectedRecipeWidth = (windowWidth * 0.55) - 40;
-	local selectedRecipeHeight = 290;
+	local selectedRecipeHeight = 270;
 
 	local quickslotSearchLeft = selectedRecipeLeft;
 	local quickslotSearchTop = selectedRecipeTop + selectedRecipeHeight + 10;
@@ -100,11 +100,14 @@ function CreateMainWindow()
 	end
 
 	MainWindow.professionButtons = {};
-	MainWindow.professionButtonIndices = { 0, 0, 0 };
-	for i = 1, 3 do
+	MainWindow.professionButtonIndices = {};
+	local pos = characterDropDown:GetLeft() + characterDropDown:GrabWidth() + 20;
+	for i = 1, ProfessionNumber do
+		MainWindow.professionButtonIndices[i] = 0;
 		local professionButton = Turbine.UI.Lotro.Button();
 		professionButton:SetParent(MainWindow);
-		professionButton:SetPosition(10+(i-1)*(professionButtonWidth+10), professionButtonTop);
+		
+		professionButton:SetPosition(pos+(i-1)*(professionButtonWidth+10), professionButtonTop);
 		professionButton:SetSize(professionButtonWidth, 32);
 		table.insert(MainWindow.professionButtons, professionButton);
 
@@ -436,19 +439,16 @@ end
 function UpdateCharacter()
 	local character = CharacterList[CurrentCharacter];
 
-	if character.vocation then
-		local buttonIndex = 1;
-		for profession, professionData in pairs(character.professions) do
-			MainWindow.professionButtons[buttonIndex]:SetVisible(true);
-			MainWindow.professionButtons[buttonIndex]:SetText(GetProfessionName(profession));
-			MainWindow.professionButtonIndices[buttonIndex] = profession;
-			buttonIndex = buttonIndex + 1;
-		end
-	else
-		for i = 1, 3 do
-			MainWindow.professionButtons[i]:SetVisible(false);
-		end
-		MainWindow.professionButtonIndices = { 0, 0, 0 }
+	for i = 1, ProfessionNumber do
+		MainWindow.professionButtons[i]:SetVisible(false);
+		MainWindow.professionButtonIndices[i] = 0;
+	end
+	local buttonIndex = 1;
+	for profession, professionData in pairs(character.professions) do
+		MainWindow.professionButtons[buttonIndex]:SetVisible(true);
+		MainWindow.professionButtons[buttonIndex]:SetText(GetProfessionName(profession));
+		MainWindow.professionButtonIndices[buttonIndex] = profession;
+		buttonIndex = buttonIndex + 1;
 	end
 
 	MainWindow.refreshIcon:SetVisible(CurrentCharacter == LocalPlayerCharacter);
@@ -459,7 +459,7 @@ end
 
 function SetCurrentProfession(profession)
 	-- Update profession button status
-	for i = 1, 3 do
+	for i = 1, ProfessionNumber do
 		if i == profession then
 			MainWindow.professionButtons[i]:SetEnabled(false);
 		else

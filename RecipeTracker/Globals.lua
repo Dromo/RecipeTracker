@@ -65,6 +65,8 @@ function CreateLocalizationInfo()
 		Strings.TierNames[Turbine.Gameplay.CraftTier.Doomfold] = "Unheilskluft";
 		Strings.TierNames[Turbine.Gameplay.CraftTier.Ironfold] = "Eisenbruch";
 		Strings.TierNames[Turbine.Gameplay.CraftTier.MinasIthil] = "Minis Ithil";
+		Strings.TierNames[Turbine.Gameplay.CraftTier.Gundabad] = "Gundabad";
+		Strings.TierNames[Turbine.Gameplay.CraftTier.Umbar] = "Umbar";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Tailor] = "Schneider";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Woodworker] = "Drechsler";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Farmer] = "Bauer";
@@ -129,6 +131,8 @@ function CreateLocalizationInfo()
 		Strings.TierNames[Turbine.Gameplay.CraftTier.Doomfold] = "Folde du Destin";
 		Strings.TierNames[Turbine.Gameplay.CraftTier.Ironfold] = "Crevasse de fer";
 		Strings.TierNames[Turbine.Gameplay.CraftTier.MinasIthil] = "Minas Ithil";
+		Strings.TierNames[Turbine.Gameplay.CraftTier.Gundabad] = "Gundabad";
+		Strings.TierNames[Turbine.Gameplay.CraftTier.Umbar] = "Umbar";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Tailor] = "Tailleur";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Woodworker] = "Menuisier";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Farmer] = "Fermier";
@@ -168,6 +172,8 @@ function CreateLocalizationInfo()
 		Strings.TierNames[Turbine.Gameplay.CraftTier.Doomfold] = "Doomfold";
 		Strings.TierNames[Turbine.Gameplay.CraftTier.Ironfold] = "Ironfold";
 		Strings.TierNames[Turbine.Gameplay.CraftTier.MinasIthil] = "Minas Ithil";
+		Strings.TierNames[Turbine.Gameplay.CraftTier.Gundabad] = "Gundabad";
+		Strings.TierNames[Turbine.Gameplay.CraftTier.Umbar] = "Umbar";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Tailor] = "Tailor";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Woodworker] = "Woodworker";
 		Strings.ProfessionNames[Turbine.Gameplay.Profession.Farmer] = "Farmer";

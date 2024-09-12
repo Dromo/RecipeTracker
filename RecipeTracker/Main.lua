@@ -31,6 +31,8 @@ Turbine.Gameplay.CraftTier.Anorien = 10;
 Turbine.Gameplay.CraftTier.Doomfold = 11;
 Turbine.Gameplay.CraftTier.Ironfold = 12;
 Turbine.Gameplay.CraftTier.MinasIthil = 13;
+Turbine.Gameplay.CraftTier.Gundabad = 14;
+Turbine.Gameplay.CraftTier.Umbar = 15;
 
 
 
@@ -112,6 +114,8 @@ UpdatePlayerData(true);
 
 -- Set default character to the current character
 CurrentCharacter = LocalPlayerCharacter;
+
+ProfessionNumber = 4;
 
 CreateMainWindow();
 CreateOptionsPanel();

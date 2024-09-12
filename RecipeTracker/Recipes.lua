@@ -41,91 +41,86 @@ function UpdatePlayerData(includeItemInfo)
 	local character = CharacterList[LocalPlayerCharacter];
 
 	local playerAttr = player:GetAttributes();
-	character.vocation = playerAttr:GetVocation();
-	character.professions = nil;
+	character.professions = {};
 
-	if character.vocation then
-		character.professions = {};
+	for k,v in pairs(Turbine.Gameplay.Profession) do
+		local professionInfo = playerAttr:GetProfessionInfo(v);
 
-		for k,v in pairs(Turbine.Gameplay.Profession) do
-			local professionInfo = playerAttr:GetProfessionInfo(v);
+		if professionInfo then
+			local professionData = {};
+		
+			professionData.proficiencyLevel = professionInfo:GetProficiencyLevel();
+			professionData.masteryLevel = professionInfo:GetMasteryLevel();
 
-			if professionInfo then
-				local professionData = {};
-			
-				professionData.proficiencyLevel = professionInfo:GetProficiencyLevel();
-				professionData.masteryLevel = professionInfo:GetMasteryLevel();
+			professionData.proficiencyExp = professionInfo:GetProficiencyExperience();
+			professionData.proficiencyExpTarget = professionInfo:GetProficiencyExperienceTarget();
+			professionData.masteryExp = professionInfo:GetMasteryExperience();
+			professionData.masteryExpTarget = professionInfo:GetMasteryExperienceTarget();
 
-				professionData.proficiencyExp = professionInfo:GetProficiencyExperience();
-				professionData.proficiencyExpTarget = professionInfo:GetProficiencyExperienceTarget();
-				professionData.masteryExp = professionInfo:GetMasteryExperience();
-				professionData.masteryExpTarget = professionInfo:GetMasteryExperienceTarget();
-
-				professionData.recipes = {};
-				for i = 1, professionInfo:GetRecipeCount() do
-					local recipe = professionInfo:GetRecipe(i);
-					local recipeName = recipe:GetName();
-					local recipeIndex = RecipeHash[recipeName];
-					local recipeData = nil;
-					if recipeIndex then
-						recipeData = RecipeList[recipeIndex];
-					else
-						recipeData = {};
-						table.insert(RecipeList, recipeData);
-						recipeIndex = #RecipeList;
-						RecipeHash[recipeName] = recipeIndex;
-					end
-
-					recipeData.name = recipeName;
-					recipeData.category = recipe:GetCategoryName();
-					recipeData.tier = recipe:GetTier();
-
-					local itemInfo = recipe:GetResultItemInfo();
-					if includeItemInfo then
-						recipeData.resultItemInfo = itemInfo;
-					else
-						recipeData.resultItemInfo = nil;
-					end
-					recipeData.resultIcon = itemInfo:GetIconImageID();
-					recipeData.resultIconBack = itemInfo:GetBackgroundImageID();
-
-					recipeData.ingredients = {};
-
-					for j = 1, recipe:GetIngredientCount() do
-						local ingredient = recipe:GetIngredient(j);
-						local ingredientInfo = ingredient:GetItemInfo();
-						local ingredientName = ingredientInfo:GetName();
-
-						local ingredientIndex = IngredientHash[ingredientName];
-						local ingredientData = nil;
-						if ingredientIndex then
-							ingredientData = IngredientList[ingredientIndex];
-						else
-							ingredientData = {};
-							table.insert(IngredientList, ingredientData);
-							ingredientIndex = #IngredientList;
-							IngredientHash[ingredientName] = ingredientIndex;
-						end
-
-						ingredientData.name = ingredientName;
-						if includeItemInfo then
-							ingredientData.itemInfo = ingredientInfo;
-						else
-							ingredientData.itemInfo = nil;
-						end
-						ingredientData.icon = ingredientInfo:GetIconImageID();
-						ingredientData.iconBack = ingredientInfo:GetBackgroundImageID();
-
-						local quantity = ingredient:GetRequiredQuantity();
-
-						recipeData.ingredients[ingredientIndex] = quantity;
-					end
-
-					professionData.recipes[recipeIndex] = true;
+			professionData.recipes = {};
+			for i = 1, professionInfo:GetRecipeCount() do
+				local recipe = professionInfo:GetRecipe(i);
+				local recipeName = recipe:GetName();
+				local recipeIndex = RecipeHash[recipeName];
+				local recipeData = nil;
+				if recipeIndex then
+					recipeData = RecipeList[recipeIndex];
+				else
+					recipeData = {};
+					table.insert(RecipeList, recipeData);
+					recipeIndex = #RecipeList;
+					RecipeHash[recipeName] = recipeIndex;
 				end
 
-				character.professions[v] = professionData;
+				recipeData.name = recipeName;
+				recipeData.category = recipe:GetCategoryName();
+				recipeData.tier = recipe:GetTier();
+
+				local itemInfo = recipe:GetResultItemInfo();
+				if includeItemInfo then
+					recipeData.resultItemInfo = itemInfo;
+				else
+					recipeData.resultItemInfo = nil;
+				end
+				recipeData.resultIcon = itemInfo:GetIconImageID();
+				recipeData.resultIconBack = itemInfo:GetBackgroundImageID();
+
+				recipeData.ingredients = {};
+
+				for j = 1, recipe:GetIngredientCount() do
+					local ingredient = recipe:GetIngredient(j);
+					local ingredientInfo = ingredient:GetItemInfo();
+					local ingredientName = ingredientInfo:GetName();
+
+					local ingredientIndex = IngredientHash[ingredientName];
+					local ingredientData = nil;
+					if ingredientIndex then
+						ingredientData = IngredientList[ingredientIndex];
+					else
+						ingredientData = {};
+						table.insert(IngredientList, ingredientData);
+						ingredientIndex = #IngredientList;
+						IngredientHash[ingredientName] = ingredientIndex;
+					end
+
+					ingredientData.name = ingredientName;
+					if includeItemInfo then
+						ingredientData.itemInfo = ingredientInfo;
+					else
+						ingredientData.itemInfo = nil;
+					end
+					ingredientData.icon = ingredientInfo:GetIconImageID();
+					ingredientData.iconBack = ingredientInfo:GetBackgroundImageID();
+
+					local quantity = ingredient:GetRequiredQuantity();
+
+					recipeData.ingredients[ingredientIndex] = quantity;
+				end
+
+				professionData.recipes[recipeIndex] = true;
 			end
+
+			character.professions[v] = professionData;
 		end
 	end
 
@@ -137,15 +132,6 @@ end
 
 function GetProfessionName(profession)
 	return Strings.ProfessionNames[profession];
-end
-
-function GetVocationName(vocation)
-	for k, v in pairs(Turbine.Gameplay.Vocation) do
-		if v == vocation then
-			return k;
-		end
-	end
-	return "Invalid vocation";
 end
 
 function CreateRecipeTree(recipes)
